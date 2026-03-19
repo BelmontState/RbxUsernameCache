@@ -6,6 +6,16 @@ var builder = WebApplication.CreateBuilder(args);
 Env.Load();
 Env.TraversePath().Load();
 
+builder.Services.AddCors(opts =>
+{
+    opts.AddPolicy("CorsAllow",
+        policyBuilder => policyBuilder
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .Build());
+});
+
 builder.Services.AddOpenApi();
 
 builder.Services.AddHttpClient();
@@ -46,6 +56,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 
