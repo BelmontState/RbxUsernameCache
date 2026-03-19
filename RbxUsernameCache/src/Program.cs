@@ -57,7 +57,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseCors();
+app.UseCors("CorsAllow");
 
 app.UseHttpsRedirection();
 
